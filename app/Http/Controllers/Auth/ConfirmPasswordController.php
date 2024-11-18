@@ -40,7 +40,7 @@ class ConfirmPasswordController extends Controller
     }
 
     /**
-     * Show the password confirmation form.
+     * 
      *
      * @return \Illuminate\View\View
      */

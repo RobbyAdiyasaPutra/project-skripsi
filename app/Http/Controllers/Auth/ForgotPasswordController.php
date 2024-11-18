@@ -21,7 +21,7 @@ class ForgotPasswordController extends Controller
     use SendsPasswordResetEmails;
 
     /**
-     * Where to redirect users after sending the password reset link.
+     * 
      *
      * @var string
      */

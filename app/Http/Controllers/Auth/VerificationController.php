@@ -45,7 +45,7 @@ class VerificationController extends Controller
     }
 
     /**
-     * Show the email verification notice.
+     * 
      *
      * @return \Illuminate\Http\Response
      */

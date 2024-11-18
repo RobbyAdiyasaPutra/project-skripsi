@@ -13,7 +13,8 @@ class CriteriaModelPolicy
      */
     public function viewAny(User $user): bool
     {
-        //
+        // Misalnya, hanya pengguna dengan peran 'admin' atau 'manager' yang dapat melihat daftar semua model
+        return $user->hasRole('admin') || $user->hasRole('manager');
     }
 
     /**
@@ -21,7 +22,8 @@ class CriteriaModelPolicy
      */
     public function view(User $user, CriteriaModel $criteriaModel): bool
     {
-        //
+        // Pengguna dapat melihat model jika mereka adalah pemiliknya atau memiliki peran 'admin'
+        return $user->id === $criteriaModel->user_id || $user->hasRole('admin');
     }
 
     /**
@@ -29,7 +31,8 @@ class CriteriaModelPolicy
      */
     public function create(User $user): bool
     {
-        //
+        // Pengguna dapat membuat model jika mereka memiliki peran 'editor' atau 'admin'
+        return $user->hasRole('editor') || $user->hasRole('admin');
     }
 
     /**
@@ -37,7 +40,8 @@ class CriteriaModelPolicy
      */
     public function update(User $user, CriteriaModel $criteriaModel): bool
     {
-        //
+        // Pengguna dapat memperbarui model jika mereka adalah pemiliknya atau memiliki peran 'admin'
+        return $user->id === $criteriaModel->user_id || $user->hasRole('admin');
     }
 
     /**
@@ -45,7 +49,8 @@ class CriteriaModelPolicy
      */
     public function delete(User $user, CriteriaModel $criteriaModel): bool
     {
-        //
+        // Pengguna dapat menghapus model jika mereka adalah pemiliknya atau memiliki peran 'admin'
+        return $user->id === $criteriaModel->user_id || $user->hasRole('admin');
     }
 
     /**
@@ -53,7 +58,8 @@ class CriteriaModelPolicy
      */
     public function restore(User $user, CriteriaModel $criteriaModel): bool
     {
-        //
+        // Pengguna dapat mengembalikan model yang dihapus jika mereka adalah pemiliknya atau memiliki peran 'admin'
+        return $user->id === $criteriaModel->user_id || $user->hasRole('admin');
     }
 
     /**
@@ -61,6 +67,7 @@ class CriteriaModelPolicy
      */
     public function forceDelete(User $user, CriteriaModel $criteriaModel): bool
     {
-        //
+        // Pengguna dapat menghapus model secara permanen jika mereka adalah pemiliknya atau memiliki peran 'admin'
+        return $user->id === $criteriaModel->user_id || $user->hasRole('admin');
     }
 }

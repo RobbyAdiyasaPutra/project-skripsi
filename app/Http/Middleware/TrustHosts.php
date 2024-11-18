@@ -14,7 +14,10 @@ class TrustHosts extends Middleware
     public function hosts(): array
     {
         return [
-            $this->allSubdomainsOfApplicationUrl(),
+            $this->allSubdomainsOfApplicationUrl(),  // Mempercayai semua subdomain dari aplikasi
+
+            // Anda bisa menambahkan host lainnya jika perlu:
+            // 'example.com', // Contoh jika Anda ingin menambahkan host tertentu
         ];
     }
 }

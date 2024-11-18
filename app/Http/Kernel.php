@@ -14,8 +14,7 @@ class Kernel extends HttpKernel
      * @var array<int, class-string|string>
      */
     protected $middleware = [
-        // \App\Http\Middleware\TrustHosts::class,
-        \App\Http\Middleware\TrustProxies::class,
+        \App\Http\Middleware\TrustProxies::class,  // Pastikan ini diperlukan atau aktifkan kembali TrustHosts jika diperlukan
         \Illuminate\Http\Middleware\HandleCors::class,
         \App\Http\Middleware\PreventRequestsDuringMaintenance::class,
         \Illuminate\Foundation\Http\Middleware\ValidatePostSize::class,
@@ -34,13 +33,14 @@ class Kernel extends HttpKernel
             \Illuminate\Cookie\Middleware\AddQueuedCookiesToResponse::class,
             \Illuminate\Session\Middleware\StartSession::class,
             \Illuminate\View\Middleware\ShareErrorsFromSession::class,
-            \App\Http\Middleware\VerifyCsrfToken::class,
+            \App\Http\Middleware\VerifyCsrfToken::class,  // Pastikan CSRF diaktifkan sesuai kebutuhan
             \Illuminate\Routing\Middleware\SubstituteBindings::class,
         ],
 
         'api' => [
+            // Jika menggunakan Sanctum untuk API, pastikan middleware berikut diaktifkan
             // \Laravel\Sanctum\Http\Middleware\EnsureFrontendRequestsAreStateful::class,
-            \Illuminate\Routing\Middleware\ThrottleRequests::class.':api',
+            \Illuminate\Routing\Middleware\ThrottleRequests::class . ':api', // Pastikan throttling sesuai dengan batasan API
             \Illuminate\Routing\Middleware\SubstituteBindings::class,
         ],
     ];

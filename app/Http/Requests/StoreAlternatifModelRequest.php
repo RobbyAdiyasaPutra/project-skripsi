@@ -3,7 +3,7 @@
 namespace App\Http\Requests;
 
 use Illuminate\Foundation\Http\FormRequest;
-use Illuminate\Contracts\Validation\ValidationRule;
+
 class StoreAlternatifModelRequest extends FormRequest
 {
     /**
@@ -11,7 +11,11 @@ class StoreAlternatifModelRequest extends FormRequest
      */
     public function authorize(): bool
     {
-        return false;
+        // Mengizinkan hanya pengguna yang terautentikasi
+        return auth()->check();
+        
+        // Jika perlu pengecekan berdasarkan role, contoh:
+        // return auth()->user()->hasRole('admin');
     }
 
     /**
@@ -22,7 +26,13 @@ class StoreAlternatifModelRequest extends FormRequest
     public function rules(): array
     {
         return [
-            //
+            // Validasi untuk field 'name'
+            'name' => 'required|string|max:255',
+            
+            // Validasi untuk field 'description' (misalnya bisa kosong, maksimal 500 karakter)
+            'description' => 'nullable|string|max:500',
+
+            // Tambahkan aturan validasi lainnya sesuai kebutuhan
         ];
     }
 }

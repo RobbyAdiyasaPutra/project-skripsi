@@ -7,11 +7,14 @@ use Illuminate\Foundation\Http\Middleware\PreventRequestsDuringMaintenance as Mi
 class PreventRequestsDuringMaintenance extends Middleware
 {
     /**
-     * The URIs that should be reachable while maintenance mode is enabled.
+     * Daftar URI yang masih bisa diakses meskipun mode pemeliharaan diaktifkan.
      *
      * @var array<int, string>
      */
     protected $except = [
-        //
+        'status',          // Misalnya status untuk menunjukkan bahwa aplikasi sedang dalam pemeliharaan
+        'health-check',    // Misalnya endpoint untuk health check
+        'login',           // Misalnya login untuk mengizinkan akses admin
+        // Tambahkan URI lain yang perlu dikecualikan dari pemeliharaan
     ];
 }

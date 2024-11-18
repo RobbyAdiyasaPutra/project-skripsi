@@ -12,8 +12,10 @@ class BroadcastServiceProvider extends ServiceProvider
      */
     public function boot(): void
     {
+        // Register the broadcasting routes, allowing the frontend to listen to channels
         Broadcast::routes();
 
+        // Load the channel definitions from the routes/channels.php file
         require base_path('routes/channels.php');
     }
 }

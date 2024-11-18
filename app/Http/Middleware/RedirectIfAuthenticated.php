@@ -13,18 +13,25 @@ class RedirectIfAuthenticated
     /**
      * Handle an incoming request.
      *
-     * @param  \Closure(\Illuminate\Http\Request): (\Symfony\Component\HttpFoundation\Response)  $next
+     * @param  \Illuminate\Http\Request  $request
+     * @param  \Closure  $next
+     * @param  string  ...$guards
+     * @return \Symfony\Component\HttpFoundation\Response
      */
     public function handle(Request $request, Closure $next, string ...$guards): Response
     {
+        // Tentukan default guard jika tidak ada yang diberikan
         $guards = empty($guards) ? [null] : $guards;
 
+        // Periksa setiap guard untuk memastikan apakah pengguna terautentikasi
         foreach ($guards as $guard) {
+            // Jika pengguna terautentikasi, alihkan ke halaman beranda (HOME)
             if (Auth::guard($guard)->check()) {
                 return redirect(RouteServiceProvider::HOME);
             }
         }
 
+        // Jika pengguna belum terautentikasi, lanjutkan permintaan
         return $next($request);
     }
 }

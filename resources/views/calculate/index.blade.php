@@ -92,7 +92,7 @@
                                             <td>{{ $a->name }}</td>
                                             @foreach ($criterion as $critKey => $c)
                                                 <td>
-                                                {{ $weightedMatrix[$a->id][$c->id] ?? '0' }}
+                                                    {{ $normalizedMatrix[$a->id][$c->id] }}
                                                 </td>
                                             @endforeach
                                         </tr>
@@ -142,7 +142,7 @@
                                             <td>{{ $a->name }}</td>
                                             @foreach ($criterion as $critKey => $c)
                                                 <td>
-                                                {{ $weightedMatrix[$a->id][$c->id] ?? '0' }}
+                                                    {{ $weightedMatrix[$a->id][$c->id] }}
                                                 </td>
                                             @endforeach
                                         </tr>

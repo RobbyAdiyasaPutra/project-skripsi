@@ -14,20 +14,20 @@ use Illuminate\Support\Facades\Auth;
 | Web Routes
 |----------------------------------------------------------------------
 |
-| Here is where you can register web routes for your application. These
-| routes are loaded by the RouteServiceProvider and all of them will
-| be assigned to the "web" middleware group. Make something great!
+| Here is where you can register web routes for your application.
+| Routes are loaded by the RouteServiceProvider and assigned to the "web" middleware group.
+| Make something great!
 |
 */
 
 // Halaman Dashboard setelah login
-Route::get('/dashboard', function () {
+Route::middleware('auth')->get('/dashboard', function () {
     return view('dashboard.home');
-})->middleware('auth'); // Hanya bisa diakses oleh pengguna yang sudah login
+})->name('dashboard');
 
 // Grup rute untuk home, login, dan logout
 Route::prefix('/')->group(function () {
-    // Halaman utama (Welcome)
+    // Halaman utama (Welcome) - tanpa autentikasi
     Route::get('/', function () {
         return view('welcome');
     });
@@ -43,12 +43,15 @@ Route::prefix('/')->group(function () {
     Route::middleware('auth')->get('/home', [HomeController::class, 'index'])->name('home');
 
     // Rute-rute resource yang ada
-    Route::resource('criteria', CriteriaModelController::class);
-    Route::resource('alternatif', AlternatifModelController::class);
-    Route::resource('decisionmatrix', DecisionMatrixController::class);
-    Route::get('/calculate', [VikorMethodController::class, 'index'])->name('calculate.index');
+    Route::middleware('auth')->resource('criteria', CriteriaModelController::class);
+    Route::middleware('auth')->resource('alternatif', AlternatifModelController::class);
+    Route::middleware('auth')->resource('decisionmatrix', DecisionMatrixController::class);
+    Route::middleware('auth')->get('/calculate', [VikorMethodController::class, 'index'])->name('calculate.index');
 });
 
+// Rute untuk registrasi dan autentikasi
 Auth::routes();
 
-Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
+// Menambahkan rute /home jika diperlukan
+// Jika sudah menggunakan rute di atas, ini bisa dihapus untuk menghindari duplikasi
+Route::get('/home', [HomeController::class, 'index'])->name('home');

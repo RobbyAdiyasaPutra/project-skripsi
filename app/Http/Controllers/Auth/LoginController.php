@@ -34,7 +34,20 @@ class LoginController extends Controller
      */
     public function __construct()
     {
-        $this->middleware('guest')->except('logout');
-        $this->middleware('auth')->only('logout');
+        $this->middleware('guest')->except('logout'); // Membatasi middleware logout hanya untuk user yang sudah login
+    }
+
+    /**
+     * Menampilkan form login (tampilan kustom)
+     */
+    public function showLoginForm()
+    {
+        return view('auth.login'); // Sesuaikan dengan file login.blade.php yang sudah kamu buat
+    }
+
+    public function logout()
+    {
+        $this->guard()->logout();
+        return redirect('/'); // Setelah logout, redirect ke halaman depan atau welcome
     }
 }

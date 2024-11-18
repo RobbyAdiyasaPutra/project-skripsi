@@ -836,10 +836,20 @@
         @if (Route::has('login'))
             <div class="sm:fixed sm:top-0 sm:right-0 p-6 text-right z-10">
                 @auth
+                    <!-- Jika sudah login, tampilkan link ke halaman home -->
                     <a href="{{ url('/home') }}" class="font-semibold text-gray-600 hover:text-gray-900 dark:text-gray-400 dark:hover:text-white focus:outline focus:outline-2 focus:rounded-sm focus:outline-red-500">
                         Home
                     </a>
+
+                    <!-- Form untuk logout -->
+                    <form method="POST" action="{{ route('logout') }}" class="inline-block ml-4">
+                        @csrf
+                        <button type="submit" class="font-semibold text-gray-600 hover:text-gray-900 dark:text-gray-400 dark:hover:text-white focus:outline focus:outline-2 focus:rounded-sm focus:outline-red-500">
+                            Log out
+                        </button>
+                    </form>
                 @else
+                    <!-- Jika belum login, tampilkan link untuk login dan register -->
                     <a href="{{ route('login') }}" class="font-semibold text-gray-600 hover:text-gray-900 dark:text-gray-400 dark:hover:text-white focus:outline focus:outline-2 focus:rounded-sm focus:outline-red-500">
                         Log in
                     </a>
@@ -862,17 +872,9 @@
 
             <div class="mt-16">
                 <div class="grid grid-cols-1 md:grid-cols-2 gap-6 lg:gap-8">
-                    <a href="https://laravel.com/docs" class="scale-100 p-6 bg-white dark:bg-gray-800/50 dark:bg-gradient-to-bl from-gray-700/50 via-transparent dark:ring-1 dark:ring-inset dark:ring-white/5 rounded-lg shadow-2xl shadow-gray-500/20 dark:shadow-none flex motion-safe:hover:scale-[1.01] transition-all duration-250 focus:outline focus:outline-2 focus:outline-red-500">
-                        <div>
-                            <div class="h-16 w-16 bg-red-50 dark:bg-red-800/20 flex items-center justify-center rounded-full">
-                                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" class="w-7 h-7 stroke-red-500">
-                                    <path stroke-linecap="round" stroke-linejoin="round" d="M9 8.25L4.5 12M4.5 12L9 15.75M4.5 12H19.5" />
-                                </svg>
-                            </div>
-                            <div class="ml-6 text-sm leading-relaxed text-gray-600 dark:text-gray-300">
-                                Create your own Laravel application using a simple start!
-                            </div>
-                        </div>
+                    <a href="https://laravel.com/docs" class="scale-100 p-6 bg-white dark:bg-gray-800/50 dark:bg-gradient-to-bl from-gray-700/50 via-transparent dark:ring-1 dark:ring-inset dark:ring-white/5 rounded-lg shadow-2xl group hover:bg-white hover:ring-1 hover:ring-inset hover:ring-gray-500 dark:hover:ring-white/10 dark:hover:bg-gray-800 transition-all">
+                        <h2 class="text-lg text-gray-900 dark:text-white font-semibold leading-8">Documentation</h2>
+                        <p class="mt-4 text-base text-gray-500 dark:text-gray-400">Explore the comprehensive documentation on Laravel features and how to use them in your projects.</p>
                     </a>
                 </div>
             </div>
